@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+//activate
+Route::get('/activate','Auth\LoginController@activate');
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/', function () {
+        return view('welcome');
+    });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
