@@ -21,8 +21,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('home');
+    public function index(){
+        if(view()->exists('main_index')){
+
+            return view('main_index',[
+                'content'=> '',
+            ]);
+        }
+        abort(404);
     }
 }

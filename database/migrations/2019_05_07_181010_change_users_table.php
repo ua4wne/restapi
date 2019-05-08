@@ -14,6 +14,7 @@ class ChangeUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_admin')->default(0);
             $table->boolean('active')->default(0);
             $table->string('login',50)->unique();
             $table->string('auth_code',100)->nullable();

@@ -45,7 +45,7 @@ class AddFirstUser extends Command
             $this->info("There are already users in the database");
         }
         else{
-            User::create(['active'=>1,'login'=>'admin','name'=>'Administrator','email'=>$this->argument('email'),'password' => Hash::make('12345678')]);
+            User::create(['active'=>1,'is_admin'=>1,'login'=>'admin','name'=>'Administrator','email'=>$this->argument('email'),'password' => Hash::make('12345678')]);
             $this->info('New administrator added with login admin and password 12345678');
         }
     }
