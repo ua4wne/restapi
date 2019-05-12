@@ -7,7 +7,7 @@
 @section('content')
     <!-- START BREADCRUMB -->
     <ul class="breadcrumb">
-        <li><a href="{{ route('main') }}">Рабочий стол</a></li>
+        <li><a href="{{ route('home') }}">Рабочий стол</a></li>
         <li><a href="{{ route('users') }}">Пользователи</a></li>
         <li class="active">Новая запись</li>
     </ul>

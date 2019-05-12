@@ -17,6 +17,7 @@ Route::get('/activate','Auth\LoginController@activate');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index');
     //users/ группа обработки роутов users
     Route::group(['prefix'=>'users'], function(){
         Route::get('/',['uses'=>'UserController@index','as'=>'users']);

@@ -16,11 +16,11 @@
     <!-- Font Awesome -->
     <link href="/css/font-awesome.min.css" rel="stylesheet">
     <!-- dataTables -->
-    <link href="/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="/css/custom.min.css" rel="stylesheet">
-    <!-- Custom Theme Style
-    <link href="/css/app.css" rel="stylesheet"> -->
+    <!-- Custom Theme Style -->
+    <link href="/css/404.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -160,7 +160,7 @@
 
         @section('footer')
             <!-- footer content -->
-                <footer class="navbar- fixed- bottom">
+                <footer>
                     <div class="pull-right">
                         Великолепные системы
                     </div>
