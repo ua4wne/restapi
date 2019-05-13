@@ -73,16 +73,16 @@
     content: "> ";
 }
 
-a {
+.output > a {
     color: #fff;
     text-decoration: none;
 }
 
-a::before {
+.output > a::before {
     content: "[";
 }
 
-a::after {
+.output > a::after {
     content: "]";
 }
 

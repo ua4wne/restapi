@@ -58,6 +58,9 @@
                         <div class="menu_section">
                             <ul class="nav side-menu">
                                 <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> Рабочий стол </a></li>
+                                @if(Auth::user()->isAdmin())
+                                <li><a href="{{ route('logs') }}"><i class="fa fa-book"></i> Журнал событий </a></li>
+                                @endif
                                 <li><a><i class="fa fa-cog"></i> Настройки <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         @if(Auth::user()->isAdmin())

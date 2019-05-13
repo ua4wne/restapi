@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function(){
         //users/add
         Route::match(['get','post'],'/add',['uses'=>'UserController@create','as'=>'userAdd']);
         //users/edit
-        Route::match(['get','post','delete'],'/edit/{id}',['uses'=>'UserController@edit','as'=>'userEdit']);
+        //Route::match(['get','post','delete'],'/edit/{id}',['uses'=>'UserController@edit','as'=>'userEdit']);
         //users/reset
         Route::get('/reset/{id}',['uses'=>'UserController@resetPass','as'=>'userReset']);
         //users/ajax/edit
@@ -40,7 +40,19 @@ Route::middleware(['auth'])->group(function(){
         //devices/add
         Route::match(['get','post'],'/add',['uses'=>'DeviceController@create','as'=>'deviceAdd']);
         //devices/edit
-        Route::match(['get','post','delete'],'/edit/{id}',['uses'=>'DeviceController@edit','as'=>'deviceEdit']);
+        //Route::match(['get','post','delete'],'/edit/{id}',['uses'=>'DeviceController@edit','as'=>'deviceEdit']);
+        //devices/ajax/edit
+        Route::post('/ajax/edit',['uses'=>'Ajax\DeviceController@edit','as'=>'editDevice']);
+        //devices/ajax/delete
+        Route::post('/ajax/delete',['uses'=>'Ajax\DeviceController@delete','as'=>'deleteDevice']);
+    });
+    //eventlog/ группа обработки роутов eventlog
+    Route::group(['prefix'=>'eventlog'], function(){
+        Route::get('/',['uses'=>'EventlogController@index','as'=>'logs']);
+        //eventlog/ajax/delone
+        Route::post('/ajax/delone',['uses'=>'Ajax\EventlogController@delone','as'=>'delOnelog']);
+        //devices/ajax/delete
+        Route::post('/ajax/delete',['uses'=>'Ajax\EventlogController@delete','as'=>'deleteLog']);
     });
 });
 
