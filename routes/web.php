@@ -34,6 +34,14 @@ Route::middleware(['auth'])->group(function(){
         //users/ajax/delete
         Route::post('/ajax/delete',['uses'=>'Ajax\UserController@delete','as'=>'deleteLogin']);
     });
+    //devices/ группа обработки роутов devices
+    Route::group(['prefix'=>'devices'], function(){
+        Route::get('/',['uses'=>'DeviceController@index','as'=>'devices']);
+        //devices/add
+        Route::match(['get','post'],'/add',['uses'=>'DeviceController@create','as'=>'deviceAdd']);
+        //devices/edit
+        Route::match(['get','post','delete'],'/edit/{id}',['uses'=>'DeviceController@edit','as'=>'deviceEdit']);
+    });
 });
 
 Auth::routes();

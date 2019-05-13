@@ -291,6 +291,9 @@
                         if(res=='NO')
                             alert('Выполнение операции запрещено!');
                     }
+                    /*error: function(xhr, response){
+                        alert('Error! '+ xhr.responseText);
+                    }*/
                 });
             }
             else {

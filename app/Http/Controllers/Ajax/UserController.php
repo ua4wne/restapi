@@ -6,6 +6,8 @@ use App\Events\AddEventLogs;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+//use Validator;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -72,6 +74,8 @@ class UserController extends Controller
                 event(new AddEventLogs('access',Auth::id(),$msg,$ip));
                 return 'NO';
             }
+            //удаляем записи в журнале, если есть
+            DB::table('logs')->where('user_id', '=', $id)->delete();
 
             if($model->delete()) {
                 $msg = 'Учетная запись '.$model->login.' была удалена!';

@@ -59,7 +59,7 @@ class LoginController extends Controller
         if (Auth::attempt(['login' => $data['login'], 'password' => $data['password'], 'active' => 1])) {
             // Аутентификация успешна...
             //вызываем event
-            $msg = 'Пользователь вошел в систему '.date('Y-m-d H:i:s');
+            $msg = 'Пользователь '.Auth::user()->login.' вошел в систему '.date('Y-m-d H:i:s');
             $ip = $request->getClientIp();
             event(new AddEventLogs('logon',Auth::id(),$msg,$ip));
             return redirect()->intended($this->redirectTo);
