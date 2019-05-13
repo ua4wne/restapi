@@ -19,7 +19,7 @@ class DeviceController extends Controller
                 'head' => 'Оборудование',
                 'devices' => $devices,
             ];
-            return view('devises',$data);
+            return view('deviсes',$data);
         }
         abort(404);
     }
