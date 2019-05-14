@@ -54,6 +54,20 @@ Route::middleware(['auth'])->group(function(){
         //eventlog/ajax/delone
         Route::post('/ajax/delone',['uses'=>'Ajax\EventlogController@delone','as'=>'delOnelog']);
     });
+    //params/ группа обработки роутов params
+    Route::group(['prefix'=>'params'], function(){
+        Route::get('/',['uses'=>'ParamController@index','as'=>'params']);
+        //params/add
+        Route::match(['get','post'],'/add',['uses'=>'ParamController@create','as'=>'paramAdd']);
+        //params/edit
+        //Route::match(['get','post','delete'],'/edit/{id}',['uses'=>'ParamController@edit','as'=>'paramEdit']);
+        //params/ajax/add
+        Route::post('/ajax/add',['uses'=>'Ajax\ParamController@create','as'=>'addParam']);
+        //params/ajax/edit
+        Route::post('/ajax/edit',['uses'=>'Ajax\ParamController@edit','as'=>'editParam']);
+        //params/ajax/delete
+        Route::post('/ajax/delete',['uses'=>'Ajax\ParamController@delete','as'=>'deleteParam']);
+    });
 });
 
 Auth::routes();

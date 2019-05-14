@@ -18,7 +18,7 @@ class CreateParamsTable extends Migration
             $table->bigInteger('device_id')->unsigned();
             $table->foreign('device_id')->references('id')->on('devices');
             $table->char('name',70);
-            $table->float('val');
+            $table->float('val')->nullable();
             $table->timestamps();
         });
     }

@@ -49,7 +49,7 @@
                         <div class="form-group">
                             {!! Form::label('name','Наименование:',['class' => 'col-xs-3 control-label'])   !!}
                             <div class="col-xs-8">
-                                {!! Form::email('name',old('name'),['class' => 'form-control','placeholder'=>'Введите наименование','required','id'=>'name','maxlength'=>'70'])!!}
+                                {!! Form::text('name',old('name'),['class' => 'form-control','placeholder'=>'Введите наименование','required','id'=>'name','maxlength'=>'70'])!!}
                             </div>
                         </div>
 
@@ -65,6 +65,47 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                         <button type="button" class="btn btn-primary" id="save">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addParam" tabindex="-1" role="dialog" aria-labelledby="addParam" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
+                        </button>
+                        <h4 class="modal-title">Новый параметр</h4>
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::open(['url' => '#','id'=>'add_param','class'=>'form-horizontal','method'=>'POST']) !!}
+
+                        <div class="form-group">
+                            <div class="col-xs-8">
+                                {!! Form::hidden('device_id','',['class' => 'form-control','required'=>'required','id'=>'dev_id']) !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('name','Наименование:',['class' => 'col-xs-3 control-label'])   !!}
+                            <div class="col-xs-8">
+                                {!! Form::text('name',old('name'),['class' => 'form-control','placeholder'=>'Введите наименование','required','id'=>'pname','maxlength'=>'70'])!!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            {!! Form::label('val','Значение:',['class' => 'col-xs-3 control-label'])   !!}
+                            <div class="col-xs-8">
+                                {!! Form::text('val',old('val'),['class' => 'form-control','placeholder'=>'Введите значение','id'=>'val'])!!}
+                            </div>
+                        </div>
+
+                        {!! Form::close() !!}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary" id="addval">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -97,11 +138,11 @@
                             @foreach($devices as $k => $device)
 
                                 <tr id="{{ $device->id }}">
-                                    <th>{{ $device->uid}}</th>
-                                    <td>{{ $device->name }}</td>
-                                    <td>{{ $device->descr }}</td>
-                                    <td>{{ $device->created_at }}</td>
-                                    <td>{{ $device->updated_at }}</td>
+                                    <th> {{ $device->uid}} </th>
+                                    <td> <span class="badge badge-light" id="s{{ $device->id }}">{{ $device->params->count() }}</span> {{ $device->name }} </td>
+                                    <td> {{ $device->descr }}</td>
+                                    <td> {{ $device->created_at }}</td>
+                                    <td> {{ $device->updated_at }}</td>
                                     <td style="width:140px;">
                                             <div class="form-group" role="group">
                                                 <button class="btn btn-success btn-sm device_edit" type="button" data-toggle="modal" data-target="#editDevice" title = "Редактироватьть запись"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></button>
@@ -114,7 +155,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{ $devices->links() }}
                         @endif
                     </div>
                 </div>
@@ -181,6 +221,51 @@
             }
         });
 
+        $('#addval').click(function(e){
+            e.preventDefault();
+            var error=0;
+            $("#add_param").find(":input").each(function() {// проверяем каждое поле ввода в форме
+                if($(this).attr("required")=='required'){ //обязательное для заполнения поле формы?
+                    if(!$(this).val()){// если поле пустое
+                        $(this).css('border', '1px solid red');// устанавливаем рамку красного цвета
+                        error=1;// определяем индекс ошибки
+                    }
+                    else{
+                        $(this).css('border', '1px solid green');// устанавливаем рамку зеленого цвета
+                    }
+
+                }
+            })
+            if(error){
+                alert("Необходимо заполнять все доступные поля!");
+                return false;
+            }
+            else{
+                var id = $('#dev_id').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('addParam') }}',
+                    data: $('#add_param').serialize(),
+                    success: function(res){
+                        //alert(res);
+                        if(res=='ERR')
+                            alert('Ошибка обновления данных.');
+                        else if(res=='DBL'){
+                            alert('Параметр '+$('#pname').val()+' уже существует!');
+                            $('#pname').val('');
+                        }
+                        else{
+                            $('#s'+id).html("").html(res);
+                            $('#pname').val('');
+                        }
+                    },
+                    error: function(xhr, response){
+                        alert('Error! '+ xhr.responseText);
+                    }
+                });
+            }
+        });
+
         $('.device_edit').click(function(){
             var id = $(this).parent().parent().parent().attr("id");
             var uid = $(this).parent().parent().prevAll().eq(4).text();
@@ -191,6 +276,11 @@
             $('#name').val(name);
             $('#descr').val(descr);
             $('#device_id').val(id);
+        });
+
+        $('.add_param').click(function(){
+            var id = $(this).parent().parent().parent().attr("id");
+            $('#dev_id').val(id);
         });
 
         $('.device_delete').click(function(){

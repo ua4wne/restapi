@@ -11,8 +11,16 @@ class Device extends Model
 
     protected $fillable = ['uid','user_id','name','descr'];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\User','user_id','id');
+    }
+
+    /**
+     * Получить все переменные устройства.
+     */
+    public function params()
+    {
+        return $this->hasMany('App\Models\Param','device_id', 'id');
     }
 }

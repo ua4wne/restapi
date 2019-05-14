@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <link rel="icon" href="images/favicon.ico" type="image/ico"/>
 
     <title>{{ $title ?? '' }}</title>
 
@@ -51,7 +51,7 @@
                     </div>
                     <!-- /menu profile quick info -->
 
-                    <br />
+                    <br/>
 
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -59,7 +59,8 @@
                             <ul class="nav side-menu">
                                 <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> Рабочий стол </a></li>
                                 @if(Auth::user()->isAdmin())
-                                    <li><a href="{{ route('logs') }}"><i class="fa fa-book"></i> Журнал событий </a></li>
+                                    <li><a href="{{ route('logs') }}"><i class="fa fa-book"></i> Журнал событий </a>
+                                    </li>
                                 @endif
                                 <li><a><i class="fa fa-cog"></i> Настройки <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -68,7 +69,7 @@
                                             {{--<li><a href="{{ route('eventlog') }}">Журнал событий</a></li>--}}
                                         @endif
                                         <li><a href="{{ route('devices') }}">Оборудование</a></li>
-
+                                        <li><a href="{{ route('params') }}">Параметры</a></li>
                                         </li>
                                     </ul>
                                 </li>
@@ -98,7 +99,8 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                                   aria-expanded="false">
                                     @if(Auth::user()->image)
                                         <img src="{{ Auth::user()->image }}" alt="...">
                                     @else
@@ -109,7 +111,8 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                                     <li><a href="javascript:;"> Профиль</a></li>
-                                    <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log
+                                            Out</a></li>
                                 </ul>
                             </li>
 
