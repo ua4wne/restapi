@@ -102,9 +102,10 @@
                                     <td>{{ $device->descr }}</td>
                                     <td>{{ $device->created_at }}</td>
                                     <td>{{ $device->updated_at }}</td>
-                                    <td style="width:100px;">
+                                    <td style="width:140px;">
                                             <div class="form-group" role="group">
                                                 <button class="btn btn-success btn-sm device_edit" type="button" data-toggle="modal" data-target="#editDevice" title = "Редактироватьть запись"><i class="fa fa-edit fa-lg" aria-hidden="true"></i></button>
+                                                <button class="btn btn-info btn-sm add_param" type="button" data-toggle="modal" data-target="#addParam" title = "Добавить параметр"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i></button>
                                                 <button class="btn btn-danger btn-sm device_delete" type="button" title = "Удалить запись"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
                                             </div>
                                         </td>
@@ -206,7 +207,7 @@
                     success: function(res){
                         //alert(res);
                         if(res=='OK')
-                            $('#'+id).parent().parent().hide();
+                            $('#'+id).hide();
                         if(res=='NO')
                             alert('Выполнение операции запрещено!');
                         if(res=='ERR')

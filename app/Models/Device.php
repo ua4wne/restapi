@@ -11,4 +11,8 @@ class Device extends Model
 
     protected $fillable = ['uid','user_id','name','descr'];
 
+    public function users()
+    {
+        return $this->belongsTo('App\User','user_id','id');
+    }
 }

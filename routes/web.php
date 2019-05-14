@@ -49,10 +49,10 @@ Route::middleware(['auth'])->group(function(){
     //eventlog/ группа обработки роутов eventlog
     Route::group(['prefix'=>'eventlog'], function(){
         Route::get('/',['uses'=>'EventlogController@index','as'=>'logs']);
+        //eventlog/ajax/delete
+        Route::post('/ajax/delete',['uses'=>'Ajax\EventlogController@delete','as'=>'deleteLog']);
         //eventlog/ajax/delone
         Route::post('/ajax/delone',['uses'=>'Ajax\EventlogController@delone','as'=>'delOnelog']);
-        //devices/ajax/delete
-        Route::post('/ajax/delete',['uses'=>'Ajax\EventlogController@delete','as'=>'deleteLog']);
     });
 });
 
