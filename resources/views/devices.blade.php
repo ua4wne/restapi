@@ -210,9 +210,6 @@
                             alert('Ошибка обновления данных.');
                         if(res=='NO')
                             alert('Выполнение операции запрещено!');
-                        else{
-                            alert('Ошибка валидации данных');
-                        }
                     }/*,
                     error: function(xhr, response){
                         alert('Error! '+ xhr.responseText);

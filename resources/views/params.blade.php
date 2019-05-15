@@ -153,18 +153,20 @@
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('editParam') }}',
-                    data: $('#edit_device').serialize(),
+                    data: $('#edit_param').serialize(),
                     success: function(res){
                         //alert(res);
-                        if(res=='OK')
-                            location.reload(true);
+                        if(res=='OK'){
+                            var name = $('#name').val();
+                            var val = $('#val').val();
+                            var id = $('#param_id').val();
+                            $("#"+id).children('td').first().next().text(val);
+                            $("#"+id).children('td').first().text(name);
+                        }
                         if(res=='ERR')
                             alert('Ошибка обновления данных.');
                         if(res=='NO')
                             alert('Выполнение операции запрещено!');
-                        else{
-                            alert('Ошибка валидации данных');
-                        }
                     },
                     error: function(xhr, response){
                         alert('Error! '+ xhr.responseText);

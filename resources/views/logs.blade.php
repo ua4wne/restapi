@@ -50,7 +50,7 @@
 
                                 <tr id="{{ $log->id }}">
                                     <th>{{ $log->type }}</th>
-                                    <td>{{ $log->user->name }} ({{ $log->user->login }})</td>
+                                    <td>{{ $log->users->name }} ({{ $log->users->login }})</td>
                                     <td>{{ $log->text }}</td>
                                     <td>{{ $log->ip }}</td>
                                     <td>{{ $log->created_at }}</td>

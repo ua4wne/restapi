@@ -68,6 +68,20 @@ Route::middleware(['auth'])->group(function(){
         //params/ajax/delete
         Route::post('/ajax/delete',['uses'=>'Ajax\ParamController@delete','as'=>'deleteParam']);
     });
+    //passport/ группа обработки роутов passport
+    Route::group(['prefix'=>'passport'], function(){
+        Route::get('/',['uses'=>'PassportController@index','as'=>'passports']);
+        //passport/addclient
+        Route::match(['get','post'],'/addclient',['uses'=>'PassportController@create','as'=>'clientAdd']);
+        //params/edit
+        //Route::match(['get','post','delete'],'/edit/{id}',['uses'=>'ParamController@edit','as'=>'paramEdit']);
+        //params/ajax/add
+        //Route::post('/ajax/add',['uses'=>'Ajax\ParamController@create','as'=>'addToken']);
+        //params/ajax/edit
+        //Route::post('/ajax/edit',['uses'=>'Ajax\ParamController@edit','as'=>'editParam']);
+        //params/ajax/delete
+        //Route::post('/ajax/delete',['uses'=>'Ajax\ParamController@delete','as'=>'deleteParam']);
+    });
 });
 
 Auth::routes();

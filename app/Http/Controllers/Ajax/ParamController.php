@@ -30,4 +30,40 @@ class ParamController extends Controller
                 return 'ERR';
         }
     }
+
+    public function edit(Request $request){
+        if($request->isMethod('post')){
+            $input = $request->except('_token'); //параметр _token нам не нужен
+            $param = Param::find($input['id']);
+            $param->fill($input);
+
+            if($param->update()){
+                $msg = 'Данные параметра '.$param->name.' были изменены!';
+                $ip = $request->getClientIp();
+                event(new AddEventLogs('info',Auth::id(),$msg,$ip));
+                return 'OK';
+            }
+            else
+                return 'ERR';
+        }
+    }
+
+    public function delete(Request $request){
+        if($request->isMethod('post')){
+            $id = $request->input('id');
+            $model = Param::find($id);
+            if(Auth::user()->isAdmin() || Auth::id()==$model->devices->user_id){//может удалять только админ и владелец устройства
+                if($model->delete()) {
+                    $msg = 'Параметр '.$model->name.', контролируемый устройством '.$model->devices->name.' был удален!';
+                    $ip = $request->getClientIp();
+                    event(new AddEventLogs('info',Auth::id(),$msg,$ip));
+                    return 'OK';
+                }
+                else{
+                    return 'ERR';
+                }
+            }
+            return 'NO';
+        }
+    }
 }

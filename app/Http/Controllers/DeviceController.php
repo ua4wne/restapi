@@ -61,7 +61,6 @@ class DeviceController extends Controller
             }
         }
         if(view()->exists('new_device')){
-
             $data = [
                 'title' => 'Новое устройство',
             ];
