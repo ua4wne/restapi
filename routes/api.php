@@ -13,8 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', 'Api\AuthController@login');
+
+Route::group([
+    'middleware' => 'auth:api'
+], function () {
+    Route::get('logout', 'Api\AuthController@logout');
+    Route::get('user', 'Api\AuthController@user');
 });
 
-Route::apiResource('/data', 'CourierController');
+Route::fallback(function(){
+    return response()->json(['message' => 'resourse not found'], 404);
+})->name('api.fallback.404');
+
