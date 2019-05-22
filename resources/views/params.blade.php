@@ -179,8 +179,6 @@
             var id = $(this).parent().parent().parent().attr("id");
             var name = $(this).parent().parent().prevAll().eq(3).text();
             var val = $(this).parent().parent().prevAll().eq(2).text();
-            //var descr = $(this).parent().parent().prevAll().eq(3).text();
-
             $('#name').val(name);
             $('#val').val(val);
             $('#param_id').val(id);
