@@ -74,7 +74,7 @@
                                 </li>
                                 <li><a><i class="fa fa-key"></i> Безопасность <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="passports">Oauth-паспорт</a></li>
+                                        <li><a href="#">Oauth-паспорт</a></li>
                                     </ul>
                                 </li>
                             </ul>
